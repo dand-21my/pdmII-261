@@ -1,0 +1,129 @@
+import 'dart:async';
+
+class Aluno {
+  final int id;
+  final String nome;
+  final String curso;
+
+  Aluno({required this.id, required this.nome, required this.curso});
+
+  @override
+  String toString() => 'ID: $id | Nome: $nome | Curso: $curso';
+}
+
+class BancoSimulado {
+  final List<Aluno> _tabelaAlunos = [];
+  int _idCount = 1;
+
+  Future<void> inicializar() async {
+    await Future.delayed(Duration(milliseconds: 200));
+    print('Banco de dados alunos.db e tabela tb_alunos inicializados.');
+  }
+
+  Future<void> inserir(String nome, String curso) async {
+    await Future.delayed(Duration(milliseconds: 100));
+    if (nome.trim().isEmpty || curso.trim().isEmpty) {
+      throw ArgumentError('Nome e curso são obrigatórios.');
+    }
+    _tabelaAlunos.add(Aluno(id: _idCount++, nome: nome, curso: curso));
+  }
+
+  Future<List<Aluno>> listar() async {
+    await Future.delayed(Duration(milliseconds: 100));
+    return List.unmodifiable(_tabelaAlunos);
+  }
+}
+
+
+
+
+
+
+//resposta:Banco de dados alunos.db e tabela tb_alunos inicializados.
+3 alunos inseridos com sucesso na tb_alunos.
+
+--- Conteúdo da tabela tb_alunos ---
+ID: 1 | Nome: ismaew | Curso: Engenharia de Software
+ID: 2 | Nome: juju | Curso: Ciência da Computação
+ID: 3 | Nome: dandeires | Curso: Sistemas de Informação
+-----------------------------------
+//terminal:Last login: Thu Sep 10 16:15:57 on console
+Adms-iMac-5:~ alunos$ dart create app_banco
+Creating app_banco using template console...
+
+  .gitignore
+  analysis_options.yaml
+  CHANGELOG.md
+  pubspec.yaml
+  README.md
+  bin/app_banco.dart
+  lib/app_banco.dart
+  test/app_banco_test.dart
+
+Running pub get...                     4.3s
+  Resolving dependencies...
+  Changed 46 dependencies!
+
+Created project app_banco in app_banco! In order to get started, run the following commands:
+
+  cd app_banco
+  dart run
+
+Adms-iMac-5:~ alunos$ cd app_banco
+Adms-iMac-5:app_banco alunos$ dart pub add sqflite_common_ffi
+Resolving dependencies... 
+  _fe_analyzer_shared 54.0.0 (107.0.0 available)
+  analyzer 5.6.0 (14.3.0 available)
+  args 2.4.1 (2.7.0 available)
+  async 2.11.0 (2.13.1 available)
+  boolean_selector 2.1.1 (2.1.2 available)
+  collection 1.18.0 (1.19.1 available)
+  convert 3.1.1 (3.1.2 available)
+  coverage 1.6.3 (1.15.1 available)
+  crypto 3.0.2 (3.0.7 available)
++ ffi 2.0.2 (2.2.0 available)
+  file 6.1.4 (7.0.1 available)
+  frontend_server_client 3.2.0 (4.0.0 available)
+  glob 2.1.1 (2.2.0 available)
+  http_multi_server 3.2.1 (3.2.2 available)
+  http_parser 4.0.2 (4.1.2 available)
+  io 1.0.4 (1.1.0 available)
+  js 0.6.5 (0.7.2 available)
+  lints 2.0.1 (6.1.0 available)
+  logging 1.1.1 (1.3.0 available)
+  matcher 0.12.16 (0.12.20 available)
+  meta 1.16.0 (1.19.0 available)
+  mime 1.0.4 (2.1.0 available)
+  package_config 2.1.0 (3.0.0 available)
+  path 1.8.3 (1.9.1 available)
+  pool 1.5.1 (1.5.3 available)
+  pub_semver 2.1.4 (2.2.1 available)
+  shelf 1.4.1 (1.4.2 available)
+  shelf_static 1.1.2 (1.1.3 available)
+  shelf_web_socket 1.0.4 (3.0.0 available)
+  source_map_stack_trace 2.1.1 (2.1.2 available)
+  source_maps 0.10.12 (0.10.14 available)
+  source_span 1.10.0 (1.10.2 available)
++ sqflite_common 2.4.5+1 (2.5.12 available)
++ sqflite_common_ffi 2.2.5 (2.4.3 available)
++ sqlite3 1.11.2 (3.5.2 available)
+  stack_trace 1.11.1 (1.12.2 available)
+  stream_channel 2.1.1 (2.1.4 available)
+  string_scanner 1.2.0 (1.4.1 available)
++ synchronized 3.1.0 (3.4.2 available)
+  term_glyph 1.2.1 (1.2.2 available)
+  test 1.24.3 (1.32.0 available)
+  test_api 0.6.0 (0.7.14 available)
+  test_core 0.5.3 (0.6.20 available)
+  typed_data 1.3.2 (1.4.0 available)
+  vm_service 11.2.0 (15.3.0 available)
+  watcher 1.0.2 (1.2.1 available)
+  web_socket_channel 2.4.0 (3.0.3 available)
+  webkit_inspection_protocol 1.2.0 (1.2.1 available)
+  yaml 3.1.1 (3.1.4 available)
+Changed 5 dependencies!
+Adms-iMac-5:app_banco alunos$ dart run
+Building package executable... 
+Built app_banco:app_banco.
+Hello world: 42!
+Adms-iMac-5:app_banco alunos$ 
